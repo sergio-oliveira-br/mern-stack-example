@@ -53,3 +53,25 @@ module "nat" {
 }
 
 
+# -----
+# Route Tables
+# -----
+module "route_table_public" {
+  source           = "./modules/route_table_public"
+  vpc_id           = module.vpc.id
+  igw_id           = module.igw.id
+  public_subnet_a  = module.subnets_public.public_a_id
+  public_subnet_b  = module.subnets_public.public_b_id
+  name             = "mern"
+}
+
+module "route_table_private" {
+  source            = "./modules/route_table_private"
+  vpc_id            = module.vpc.id
+  nat_id            = module.nat.id
+  private_subnet_a  = module.subnets_private.private_a_id
+  private_subnet_b  = module.subnets_private.private_b_id
+  name              = "mern"
+}
+
+
