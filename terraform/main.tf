@@ -75,3 +75,48 @@ module "route_table_private" {
 }
 
 
+# -----
+# EKS
+# -----
+module "eks" {
+  source  = "terraform-aws-modules/eks/aws"
+  version = "~>21.0"
+
+  name               = "mern-eks"
+  kubernetes_version = "1.36"
+
+  endpoint_public_access  = true
+  endpoint_private_access = true
+
+  vpc_id = module.vpc.id
+  subnet_ids = [
+    module.subnets_private.private_a_id,
+    module.subnets_private.private_b_id
+  ]
+
+  eks_managed_node_groups = {
+    default = {
+      instance_types = ["t3.micro"]
+      desired_size   = 2
+      max_size       = 3
+      min_size       = 1
+
+      iam_role_additional_policies = {
+        "AmazonEKSWorkerNodePolicy"          = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
+        "AmazonEC2ContainerRegistryReadOnly" = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+        "AmazonEKS_CNI_Policy"               = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
+        "AmazonSSMManagedInstanceCore"       = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+      }
+
+      tags = {
+        "Name"        = "mern-eks-node-default"
+        "Environment" = "dev"
+      }
+    }
+  }
+
+  tags = {
+    "Name"        = "mern-eks"
+    "Environment" = "dev"
+  }
+}
