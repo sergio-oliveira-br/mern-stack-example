@@ -1,5 +1,14 @@
 # terraform/main.tf
 
+# -----
+# CodeCommit
+# -----
+module "cicd" {
+  source = "./modules/cicd/codecommit"
+  repository_name = "mern-app"
+}
+
+
 
 # -----
 # VPC
