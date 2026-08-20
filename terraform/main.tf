@@ -91,6 +91,18 @@ module "eks" {
   name               = "mern-eks"
   kubernetes_version = "1.36"
 
+  # EKS Addons
+  addons = {
+    coredns = {}
+    eks-pod-identity-agent = {
+      before_compute = true
+    }
+    kube-proxy = {}
+    vpc-cni = {
+      before_compute = true
+    }
+  }
+
   endpoint_public_access  = true
   endpoint_private_access = true
 
