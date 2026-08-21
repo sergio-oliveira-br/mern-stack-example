@@ -3,7 +3,7 @@
 # -----
 # CodeCommit
 # -----
-module "cicd" {
+module "codecommit" {
   source = "./modules/cicd/codecommit"
   repository_name = "mern-app"
 }
