@@ -22,22 +22,6 @@ resource "aws_iam_role" "this" {
 }
 
 
-# Minimum policy for CodeBuild
-data "aws_iam_policy_document" "codebuild_policy" {
-  statement {
-    effect = "Allow"
-
-    actions = [
-      "logs:CreateLogGroup",
-      "logs:CreateLogStream",
-      "logs:PutLogEvents",
-    ]
-
-    resources = ["*"]
-  }
-}
-
-
 # Append the policy to the paper
 resource "aws_iam_role_policy" "this" {
   role   = aws_iam_role.this.id
