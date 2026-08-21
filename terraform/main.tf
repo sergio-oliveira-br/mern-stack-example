@@ -21,6 +21,16 @@ module "codebuild" {
   service_role_arn = ""
 }
 
+# -----
+# CodeBuild Deploy - does not build anything. It only applies the manifest in EKS.
+# -----
+module "codebuild_deploy" {
+  source           = "./modules/cicd/codebuild_deploy"
+
+  project_name     = "mern-deploy"
+  artifact_bucket  = aws_s3_bucket.artifact_store.bucket
+  service_role_arn = module.codebuild_deploy.project_arn
+}
 
 
 
