@@ -65,6 +65,29 @@ resource "aws_s3_bucket_public_access_block" "public_access" {
 output "artifact_bucket" {
   value = aws_s3_bucket.artifact_store.bucket
 }
+
+
+# -----
+# CodePipeline
+# -----
+module "codepipeline" {
+  source = "./modules/cicd/codepipeline"
+
+  pipeline_name                 = "mern-pipeline"
+  artifact_bucket               = aws_s3_bucket.artifact_store.bucket
+
+  codecommit_repository_name    = module.codecommit.repository_name
+  codecommit_branch             = "main"
+
+  codebuild_project_name        = module.codebuild.project_name
+  codebuild_deploy_project_name = module.codebuild_deploy.project_name
+}
+
+
+
+
+
+
 # -----
 # VPC
 # -----
