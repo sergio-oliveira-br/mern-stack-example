@@ -1,0 +1,28 @@
+# terraform/modules/cicd/codebuild_deploy/buildspec.yml
+
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo "Installing kubectl and utilities..."
+      - curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.29.0/2024-01-04/bin/linux/amd64/kubectl
+      - chmod +x kubectl
+      - mv kubectl /usr/local/bin/
+
+  pre_build:
+    commands:
+      - echo "Updating kubeconfig..."
+      - aws eks update-kubeconfig --region $AWS_REGION --name $EKS_CLUSTER_NAME
+
+      - echo "Downloading S3 artifact..."
+      - aws s3 cp s3://$ARTIFACT_BUCKET/build_output.zip .
+      - unzip build_output.zip
+
+  build:
+    commands:
+      - echo "Applying manifest in EKS..."
+      - kubectl apply -f manifest.yaml
+
+      - echo "Restarting deployment..."
+      - kubectl rollout restart deployment/mern-app
