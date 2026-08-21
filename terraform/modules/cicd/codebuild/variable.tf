@@ -14,3 +14,8 @@ variable "service_role_arn" {
   type        = string
   description = "IAM role ARN used by CodeBuild"
 }
+
+variable "cluster_name" {
+  type        = string
+  description = "Cluster name EKS"
+}
