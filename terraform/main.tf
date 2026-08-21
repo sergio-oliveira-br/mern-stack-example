@@ -16,7 +16,7 @@ module "codebuild" {
   source           = "./modules/cicd/codebuild"
 
   project_name     = "mern-build"
-  repository_url   = module.cicd.clone_url
+  repository_url   = module.codecommit.clone_url
   cluster_name   = module.eks.cluster_name
 }
 
