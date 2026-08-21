@@ -35,6 +35,37 @@ module "codebuild_deploy" {
 
 
 # -----
+# S3 - CODEPIPELINE ARTIFACT STORE
+# -----
+resource "aws_s3_bucket" "artifact_store" {
+  bucket = "${var.pipeline_name}-artifacts"
+
+  force_destroy = false
+}
+
+# Required versioning
+resource "aws_s3_bucket_versioning" "versioning" {
+  bucket = aws_s3_bucket.artifact_store.id
+
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
+
+# Public access block
+resource "aws_s3_bucket_public_access_block" "public_access" {
+  bucket = aws_s3_bucket.artifact_store.id
+
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
+
+output "artifact_bucket" {
+  value = aws_s3_bucket.artifact_store.bucket
+}
+# -----
 # VPC
 # -----
 module "vpc" {
