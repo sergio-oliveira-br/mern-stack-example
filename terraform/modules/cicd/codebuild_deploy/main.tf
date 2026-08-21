@@ -13,6 +13,21 @@ resource "aws_codebuild_project" "this" {
     compute_type = "BUILD_GENERAL1_SMALL"
     image        = "aws/codebuild/amazonlinux-x86_64-standard:6.0"
     type         = "LINUX_CONTAINER"
+
+    environment_variable {
+      name  = "AWS_REGION"
+      value = var.region
+    }
+
+    environment_variable {
+      name  = "EKS_CLUSTER_NAME"
+      value = var.cluster_name
+    }
+
+    environment_variable {
+      name  = "ARTIFACT_BUCKET"
+      value = var.artifact_bucket
+    }
   }
 
   source {

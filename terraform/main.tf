@@ -30,6 +30,8 @@ module "codebuild_deploy" {
   project_name     = "mern-deploy"
   artifact_bucket  = aws_s3_bucket.artifact_store.bucket
   service_role_arn = module.codebuild_deploy.project_arn
+  region           = var.region
+  cluster_name     = module.eks.cluster_name
 }
 
 
