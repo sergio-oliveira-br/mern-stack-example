@@ -18,6 +18,7 @@ module "codebuild" {
   project_name     = "mern-build"
   repository_url   = module.codecommit.clone_url
   cluster_name   = module.eks.cluster_name
+  service_role_arn = ""
 }
 
 
