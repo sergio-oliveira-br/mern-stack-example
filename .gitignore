@@ -14,3 +14,4 @@ terraform/.terraform.lock.hcl
 terraform/.terraform.tfstate.lock.info
 terraform/tfplan
 .idea/vcs.xml
+mern/.env
