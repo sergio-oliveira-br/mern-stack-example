@@ -1,8 +1,10 @@
 # .gitignore
 node_modules/
-config.env
 .DS_Store
 
+# Credentials
+mern/.env
+mern/server/config.env
 
 # Terraform
 .terraform/
@@ -14,4 +16,6 @@ terraform/.terraform.lock.hcl
 terraform/.terraform.tfstate.lock.info
 terraform/tfplan
 .idea/vcs.xml
-mern/.env
+
+
+
