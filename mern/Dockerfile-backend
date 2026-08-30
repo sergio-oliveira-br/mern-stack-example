@@ -11,9 +11,6 @@ RUN npm ci
 # Copy server code
 COPY server/ .
 
-# Copy environment variables
-COPY server/config.env ./config.env
-
 # Expose API port
 EXPOSE 5050
 
