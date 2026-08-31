@@ -6,16 +6,34 @@ metadata:
   name: nginx-lab
 spec:
   replicas: 3
+
   selector:
     matchLabels:
       app: nginx-lab
+
   template:
     metadata:
       labels:
         app: nginx-lab
+
     spec:
       containers:
         - name: nginx
           image: nginx:stable-alpine
+
           ports:
             - containerPort: 80
+
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 10
+
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 10
