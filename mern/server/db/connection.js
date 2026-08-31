@@ -10,16 +10,28 @@ const client = new MongoClient(URI, {
   appName: "devrel-github-javascript-mern",
 });
 
+let db;
+
+export async function checkDatabaseHealth (){
+  try {
+    await client.db("admin").command({ping: 1});
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 try {
   // Connect the client to the server
   await client.connect();
   // Send a ping to confirm a successful connection
   await client.db("admin").command({ ping: 1 });
   console.log("Pinged your deployment. You successfully connected to MongoDB!");
+  db = client.db("employees");
 } catch (err) {
   console.error(err);
 }
 
-let db = client.db("employees");
 
+export {db}
 export default db;
