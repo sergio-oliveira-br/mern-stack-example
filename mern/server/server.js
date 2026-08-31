@@ -25,6 +25,12 @@ app.get("/health/ready", async (req, res) => {
   })
 });
 
+app.get("/health/live", (req,res) => {
+  res.status(200).json({
+    status: "UP"
+  });
+});
+
 
 app.use("/record", records);
 
