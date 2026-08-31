@@ -10,7 +10,7 @@ app.use(cors());
 app.use(express.json());
 
 
-app.get("/health", async (req, res) => {
+app.get("/health/ready", async (req, res) => {
   const databaseHealthy = await checkDatabaseHealth();
 
   if (databaseHealthy) {
