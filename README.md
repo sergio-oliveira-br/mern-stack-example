@@ -84,7 +84,7 @@ Optional: seed sample data:
 cd mern/server && node seed.js
 ```
 
-Start the backend API:
+Start the k8s.backend API:
 
 ```bash
 cd mern/server
@@ -155,7 +155,7 @@ Example request body for create or update:
 
 ### Frontend shows empty data
 
-- Confirm backend is running on `:5050`
+- Confirm k8s.backend is running on `:5050`
 - Open browser dev tools and check network requests
 - Confirm records exist in Atlas (or run `node seed.js` in the server folder)
 
