@@ -1,0 +1,25 @@
+# k8s.backend-deployment.yaml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mern-backend
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: mern-backend
+
+  template:
+    metadata:
+      labels:
+        app: mern-backend
+
+    spec:
+      containers:
+        - name: k8s.backend
+          image: mern-backend:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 5050
