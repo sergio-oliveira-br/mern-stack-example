@@ -1,0 +1,16 @@
+# k8s/backend/backend-service.yaml
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: mern-backend
+
+spec:
+  selector:
+    app: mern-backend
+
+  ports:
+    - port: 5050
+      targetPort: 5050
+
+  type: ClusterIP
