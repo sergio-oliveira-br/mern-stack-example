@@ -46,4 +46,4 @@ erDiagram
 
 - No validation schema is enforced at the database level, and the current Express routes (`mern/server/routes/record.js`) do not enforce request-body validation.
 - `level` is a free-form string. Typical values used in the seed data: `junior`, `mid`, `senior`.
-- The application convention expects `name`, `position`, and `level`, but these fields are not currently enforced by backend validation.
+- The application convention expects `name`, `position`, and `level`, but these fields are not currently enforced by k8s.backend validation.
