@@ -18,7 +18,7 @@ spec:
 
     spec:
       containers:
-        - name: k8s.backend
+        - name: backend
           image: mern-backend:latest
           imagePullPolicy: Never
           ports:
