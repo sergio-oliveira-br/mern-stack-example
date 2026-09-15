@@ -23,3 +23,7 @@ spec:
           imagePullPolicy: Never
           ports:
             - containerPort: 5050
+          readinessProbe:
+            httpGet:
+              port: 5050
+              path: /health/ready
