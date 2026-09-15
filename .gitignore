@@ -24,3 +24,4 @@ terraform/tfplan
 EDD.md
 /.vite
 package.json
+package-lock.json
