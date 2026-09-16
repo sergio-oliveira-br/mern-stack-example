@@ -6,6 +6,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node --env-file=config.env server",
+    "start:container": "node server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
