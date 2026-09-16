@@ -10,6 +10,7 @@ services:
       - "5050:5050"
     env_file:
       - ./server/config.env
+    command: npm run start:container
     restart: unless-stopped
 
   frontend:
