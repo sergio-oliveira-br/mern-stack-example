@@ -23,6 +23,14 @@ spec:
           imagePullPolicy: Never
           ports:
             - containerPort: 5050
+
+          env:
+            - name: ATLAS_URI
+              valueFrom:
+                secretKeyRef:
+                  key: ATLAS_URI
+                  name: mern-backend-secret
+
           readinessProbe:
             httpGet:
               port: 5050
