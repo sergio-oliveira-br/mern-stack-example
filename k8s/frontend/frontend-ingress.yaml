@@ -1,0 +1,21 @@
+# k8s/frontend/frontend-ingress.yaml
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: mern-frontend
+
+spec:
+  ingressClassName: nginx
+
+  rules:
+    - host: mern.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: mern-frontend
+                port:
+                  number: 80
